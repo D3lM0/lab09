@@ -90,11 +90,12 @@ public class BadIOGUI {
                 try {
                     final List<String> lines = Files.readAllLines(Path.of(PATH), StandardCharsets.UTF_8);
                     for (final String line : lines) {
-                        System.out.println(line);
+                        // CHECKSTYLE: SystemPrintln OFF
+                        System.out.println(line); // NOPMD: allowed as this is just an exercise
                     }
-                } catch (final IOException e1) {
+                } catch (final IOException t) {
                     JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
+                    t.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
             }
         });
