@@ -17,17 +17,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
-/**
- * A very simple program using a graphical interface.
- * 
- */
+/* A very simple program using a graphical interface.*/
+//CHECKSTYLE: MissingJavadocMethod OFF
 public final class SimpleGUIWithFileChooser {
 
     private static final String TITLE = "File Chooser GUI";
     private static final int PROPORTION = 3;
-    private Controller controller = new Controller();
+    private final Controller controller = new Controller();
     private final JFrame frame = new JFrame(TITLE);
 
+    // CHECKSTYLE: MissingJavadocMethod OFF
     public SimpleGUIWithFileChooser() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
@@ -56,15 +55,13 @@ public final class SimpleGUIWithFileChooser {
         browse.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 final JFileChooser fileChooser = new JFileChooser();
                 if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
                     final File chosenFile = fileChooser.getSelectedFile();
                     controller.setCurrentFile(chosenFile);
                     pathField.setText(controller.getPath());
-                } else if (fileChooser.showSaveDialog(frame) == JFileChooser.CANCEL_OPTION) {
-                    /* Does nothing */
-                } else {
+                } else if (fileChooser.showSaveDialog(frame) == JFileChooser.ERROR_OPTION) {
                     JOptionPane.showMessageDialog(frame, "Errore nella selezione del file");
                 }
             }
@@ -74,11 +71,11 @@ public final class SimpleGUIWithFileChooser {
         save.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent event) {
                 try {
                     controller.saveOnFile(text.getText());
-                } catch (IOException e1) {
-                    e1.printStackTrace(); // NOPMD
+                } catch (final IOException t) {
+                    t.printStackTrace(); // NOPMD
                 }
             }
 
@@ -86,6 +83,7 @@ public final class SimpleGUIWithFileChooser {
 
     }
 
+    /* Starts the GUI */
     private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
@@ -96,7 +94,8 @@ public final class SimpleGUIWithFileChooser {
         frame.pack();
     }
 
-    public static void main(String... args) {
+    // CHECKSTYLE: MissingJavadocMethod OFF
+    public static void main(final String... args) {
         new SimpleGUIWithFileChooser().display();
     }
 

@@ -7,31 +7,36 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
+/*
  * Application controller. Performs the I/O.
  */
-public class Controller {
-    private static final String DEFAULT_PATH = System.getProperty("user.home") +
-            File.separator +
-            "output.txt";
+//CHECKSTYLE: MissingJavadocMethod OFF
+public final class Controller {
+    private static final String DEFAULT_PATH = System.getProperty("user.home")
+            + File.separator
+            + "output.txt";
 
     private File currentFile = new File(DEFAULT_PATH);
 
+    /* Set the currentFile */
     public void setCurrentFile(final File currentFile) {
         this.currentFile = currentFile;
     }
 
+    /* Return the currentFile */
     public File getCurrentFile() {
         return currentFile;
     }
 
+    /* Return the path of the currentFile */
     public String getPath() {
         return currentFile.getAbsolutePath();
     }
 
+    /* Save the string on the currentFile */
     public void saveOnFile(final String toSave) throws FileNotFoundException, IOException {
         try (
-                final DataOutputStream writer = new DataOutputStream(
+                DataOutputStream writer = new DataOutputStream(
                         new BufferedOutputStream(
                                 new FileOutputStream(currentFile)))) {
             writer.writeUTF(toSave);
