@@ -36,6 +36,5 @@ public class Controller {
                                 new FileOutputStream(currentFile)))) {
             writer.writeUTF(toSave);
         }
-
     }
 }
