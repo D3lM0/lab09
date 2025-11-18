@@ -3,10 +3,17 @@ package it.unibo.mvc;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
@@ -18,6 +25,7 @@ public final class SimpleGUIWithFileChooser {
 
     private static final String TITLE = "File Chooser GUI";
     private static final int PROPORTION = 3;
+    private Controller controller = new Controller();
     private final JFrame frame = new JFrame(TITLE);
 
     public SimpleGUIWithFileChooser() {
@@ -27,13 +35,16 @@ public final class SimpleGUIWithFileChooser {
         final JPanel browseFilePanel = new JPanel();
         browseFilePanel.setLayout(new BorderLayout());
 
-        final JTextField text = new JTextField();
-        text.setEditable(false);
+        final JTextArea text = new JTextArea();
+        canvas.add(text);
+
+        final JTextField pathField = new JTextField(controller.getPath());
+        pathField.setEditable(false);
         final JButton browse = new JButton("Browse...");
 
         final JButton save = new JButton("Save");
 
-        browseFilePanel.add(text, BorderLayout.CENTER);
+        browseFilePanel.add(pathField, BorderLayout.CENTER);
         browseFilePanel.add(browse, BorderLayout.LINE_END);
 
         canvas.add(browseFilePanel, BorderLayout.NORTH);
@@ -41,6 +52,38 @@ public final class SimpleGUIWithFileChooser {
 
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        browse.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+                    final File chosenFile = fileChooser.getSelectedFile();
+                    controller.setCurrentFile(chosenFile);
+                    pathField.setText(controller.getPath());
+                } else if (fileChooser.showSaveDialog(frame) == JFileChooser.CANCEL_OPTION) {
+                    /* Does nothing */
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Errore nella selezione del file");
+                }
+            }
+
+        });
+
+        save.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.saveOnFile(text.getText());
+                } catch (IOException e1) {
+                    e1.printStackTrace(); // NOPMD
+                }
+            }
+
+        });
+
     }
 
     private void display() {
