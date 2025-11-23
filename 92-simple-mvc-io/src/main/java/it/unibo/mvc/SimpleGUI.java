@@ -22,7 +22,9 @@ public final class SimpleGUI {
     private final JFrame frame = new JFrame(TITLE);
     private Controller controller;
 
-    // CHECKSTYLE: MissingJavadocMethod OFF
+    /**
+     * SimpleGUI constructor.
+     */
     public SimpleGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
@@ -49,7 +51,9 @@ public final class SimpleGUI {
         });
     }
 
-    /* Starts the GUI */
+    /**
+     * Starts the GUI.
+     */
     private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
@@ -60,7 +64,11 @@ public final class SimpleGUI {
         frame.pack();
     }
 
-    // CHECKSTYLE: MissingJavadocMethod OFF
+    /**
+     * Main method.
+     * 
+     * @param args arguments passed to main method.
+     */
     public static void main(final String... args) {
         new SimpleGUI().display();
     }

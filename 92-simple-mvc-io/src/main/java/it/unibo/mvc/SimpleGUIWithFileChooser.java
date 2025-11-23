@@ -16,9 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
-/* A very simple program using a graphical interface.*/
-//CHECKSTYLE: MissingJavadocMethod OFF
+/**
+ * A very simple program using a graphical interface.
+ */
 public final class SimpleGUIWithFileChooser {
 
     private static final String TITLE = "File Chooser GUI";
@@ -26,7 +26,9 @@ public final class SimpleGUIWithFileChooser {
     private final Controller controller = new Controller();
     private final JFrame frame = new JFrame(TITLE);
 
-    // CHECKSTYLE: MissingJavadocMethod OFF
+    /**
+     * SimpleGUIWithFileChooser constructor.
+     */
     public SimpleGUIWithFileChooser() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
@@ -83,7 +85,7 @@ public final class SimpleGUIWithFileChooser {
 
     }
 
-    /* Starts the GUI */
+    /** Starts the GUI. */
     private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
@@ -94,7 +96,11 @@ public final class SimpleGUIWithFileChooser {
         frame.pack();
     }
 
-    // CHECKSTYLE: MissingJavadocMethod OFF
+    /**
+     * Main method.
+     * 
+     * @param args arguments passed to main method.
+     */
     public static void main(final String... args) {
         new SimpleGUIWithFileChooser().display();
     }

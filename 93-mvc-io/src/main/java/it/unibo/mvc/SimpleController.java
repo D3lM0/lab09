@@ -14,9 +14,9 @@ public final class SimpleController implements Controller {
     private final List<String> history = new ArrayList<>();
 
     @Override
-    public void setNextStringToPrint(String toPrint) {
+    public void setNextStringToPrint(final String toPrint) {
         if (toPrint == null) {
-            throw new NullPointerException("Input string shouldn't be null");
+            throw new NullPointerException("Input string shouldn't be null"); // NOPMD
         }
 
         this.nextString = toPrint;
@@ -39,7 +39,7 @@ public final class SimpleController implements Controller {
         }
 
         // CHECKSTYLE: SystemPrintln OFF
-        System.out.println(this.nextString);
+        System.out.println(this.nextString); // NOPMD the method should print the string on console
         this.history.add(this.nextString);
     }
 

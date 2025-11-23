@@ -25,6 +25,9 @@ public final class SimpleGUI {
     private final SimpleController controller = new SimpleController();
     private final JFrame frame = new JFrame(TITLE);
 
+    /**
+     * SimpleGUI constructor.
+     */
     public SimpleGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
@@ -52,7 +55,7 @@ public final class SimpleGUI {
         print.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 final String currentString = stringField.getText();
                 controller.setNextStringToPrint(currentString);
                 controller.printCurrentString();
@@ -63,7 +66,7 @@ public final class SimpleGUI {
         showHistory.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 final List<String> history = controller.getHistoryOfPrintedStrings();
                 historyStringArea.setText(history.toString());
             }
@@ -71,6 +74,9 @@ public final class SimpleGUI {
         });
     }
 
+    /**
+     * Starts the GUI.
+     */
     private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
@@ -82,6 +88,11 @@ public final class SimpleGUI {
         frame.pack();
     }
 
+    /**
+     * Main method.
+     * 
+     * @param args parameters passed to main method
+     */
     public static void main(final String... args) {
         new SimpleGUI().display();
     }
